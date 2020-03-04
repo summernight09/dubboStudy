@@ -17,6 +17,7 @@ public class OrderServiceImpl implements OrderService  {
         //查询用户的收货地址
         List<UserAddress> addresslist = userService.getUserAddressList(userId);
         System.out.println(addresslist);
+        System.out.println("modify 0304");
         return addresslist;
     }
 }
