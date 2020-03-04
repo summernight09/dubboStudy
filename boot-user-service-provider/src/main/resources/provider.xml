@@ -1,0 +1,23 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+    <!--1. 指定当前服务/应用的名字，一般和工程名相同，不要和别的服务重名-->
+    <dubbo:application name="boot-user-service-provider"></dubbo:application>
+
+    <!--2. 指定注册中心的位置，这里使用zookeeper注册中心-->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"></dubbo:registry>
+
+    <!--3. 指定通信规则（通信协议和通信端口-->
+    <dubbo:protocol name="dubbo" port="20881"></dubbo:protocol>
+    
+    <!--4. 暴露服务 ref:指向服务的真正的实现对象-->
+    <dubbo:service interface="com.atguigu.gmall.service.UserService" ref="userServiceImpl"></dubbo:service>
+
+    <!--服务的实现-->
+    <bean id="userServiceImpl_boot" class="com.atguigu.gmall.service.impl.UserServiceImpl"></bean>
+
+    <!--链接监控中心 通过注册中心自动发现消费服务-->
+    <dubbo:monitor protocol="registry"></dubbo:monitor>
+</beans>
